@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navgraph"
+    app:startDestination="@id/list_fragment">
+
+    <fragment
+        android:id="@+id/list_fragment"
+        android:name="com.jpakku.anywhereapplication.ui.list.ListFragment"
+        android:label="@string/list_fragment_label">
+    </fragment>
+
+    <fragment
+        android:id="@+id/detail_fragment"
+        android:name="com.jpakku.anywhereapplication.ui.detail.DetailFragment"
+        android:label="@string/detail_fragment_label">
+    </fragment>
+
+</navigation>

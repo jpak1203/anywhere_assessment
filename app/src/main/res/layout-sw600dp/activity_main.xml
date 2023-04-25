@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:baselineAligned="false"
+        android:orientation="horizontal" >
+
+        <fragment
+            android:id="@+id/list_fragment_container"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            class="com.jpakku.anywhereapplication.ui.list.ListFragment"
+            tools:layout="@layout/fragment_list" />
+
+        <fragment
+            android:id="@+id/detail_fragment_container"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            class="com.jpakku.anywhereapplication.ui.detail.DetailFragment"
+            tools:layout="@layout/fragment_detail" />
+
+    </LinearLayout>
+
+</layout>

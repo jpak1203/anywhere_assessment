@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="character" type="com.jpakku.anywhereapplication.data.CharacterItem" />
+        <variable name="onClick" type="kotlin.jvm.functions.Function1" />
+    </data>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:ellipsize="end"
+        android:letterSpacing="0.02"
+        android:maxLines="1"
+        android:onClick="@{() -> onClick.invoke(character)}"
+        android:padding="24dp"
+        android:text="@{character.name}"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="14sp"
+        tools:text="ListviewTextOption"/>
+
+</layout>
