@@ -9,6 +9,4 @@ interface MyApi {
     @GET(BuildConfig.BASE_QUERY)
     fun getAllCharacters(): Single<RelatedTopics>
 
-
-
 }

@@ -73,8 +73,6 @@ class ListFragment : Fragment() {
 
     private fun CharacterItem.onClick() {
         updateDetail(name, description, icon)
-//        findNavController().navigate(R.id.detail_fragment,
-//            bundleOf(NAME to name, DESC to description, ICON to icon))
     }
 
     private fun updateDetail(name: String, description: String, icon: String) {

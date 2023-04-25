@@ -19,10 +19,6 @@ import javax.inject.Singleton
     NetworkModule::class,])
 interface AppComponent: AndroidInjector<AnywhereApplication> {
 
-    companion object {
-        private val TAG = AppComponent::class.java.simpleName
-    }
-
     @Component.Builder
     interface Builder {
         @BindsInstance
