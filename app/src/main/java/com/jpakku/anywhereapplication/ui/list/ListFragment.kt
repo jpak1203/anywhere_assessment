@@ -68,15 +68,17 @@ class ListFragment : Fragment() {
     }
 
     interface OnItemSelectedListener {
-        fun onCharacterSelected(name: String, description: String, icon: String)
+        fun onCharacterSelected(characterItem: CharacterItem)
     }
 
     private fun CharacterItem.onClick() {
-        updateDetail(name, description, icon)
+        updateDetail(this)
     }
 
-    private fun updateDetail(name: String, description: String, icon: String) {
-        listener.onCharacterSelected(name, description, icon)
+    private fun updateDetail(characterItem: CharacterItem?) {
+        characterItem?.let {
+            listener.onCharacterSelected(it)
+        }
     }
 
     fun filter(query: CharSequence?) {
@@ -88,9 +90,15 @@ class ListFragment : Fragment() {
             .subscribe { originalList ->
                 if (!query.isNullOrEmpty()) {
                     list.addAll(originalList.filter {
-                        it.name.lowercase(Locale.getDefault()).contains(query.toString().lowercase(Locale.getDefault())) ||
-                                it.description.lowercase(Locale.getDefault()).contains(query.toString().lowercase(
-                                    Locale.getDefault()))
+                        val containsName = it.name?.let { name ->
+                            name.lowercase().contains(query.toString().lowercase())
+                        } ?: false
+
+                        val containsDescription = it.description?.let { description ->
+                            description.lowercase().contains(query.toString().lowercase())
+                        } ?: false
+
+                        containsName || containsDescription
                     })
                 } else {
                     list.addAll(originalList)

@@ -1,22 +1,24 @@
 package com.jpakku.anywhereapplication.ui.detail
 
 import android.content.Context
+import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.jpakku.anywhereapplication.R
+import com.jpakku.anywhereapplication.data.CharacterItem
 import com.jpakku.anywhereapplication.databinding.FragmentDetailBinding
 import dagger.android.support.AndroidSupportInjection
 
 class DetailFragment : Fragment() {
 
     companion object {
-        const val NAME = "name"
-        const val DESC = "desc"
-        const val ICON = "icon"
+        const val CHARACTER = "character"
     }
 
     private lateinit var binding: FragmentDetailBinding
@@ -40,23 +42,26 @@ class DetailFragment : Fragment() {
 
     private fun initView() {
         arguments?.let {
-            if (!it.isEmpty) {
-                val name = it.getString(NAME).toString()
-                val description = it.getString(DESC).toString()
-                val icon = it.getString(ICON).toString()
-
-                updateView(name, description, icon)
+            val characterItem = if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                it.getParcelable(CHARACTER, CharacterItem::class.java)
+            } else {
+                it.getParcelable(CHARACTER)
             }
+
+            characterItem?.let { item ->
+                updateView(item)
+            }
+
         }
     }
 
-    fun updateView(name: String, description: String, icon: String?) {
+    fun updateView(characterItem: CharacterItem) {
         Glide.with(this)
-            .load("https://duckduckgo.com/$icon")
+            .load("https://duckduckgo.com/${characterItem.icon}")
             .placeholder(R.drawable.pedro_pascal)
             .into(binding.characterImage)
 
-        binding.characterNameValue.text = name
-        binding.characterDescriptionValue.text = description
+        binding.characterNameValue.text = characterItem.name
+        binding.characterDescriptionValue.text = characterItem.description
     }
 }
